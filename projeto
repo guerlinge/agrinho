@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroVila | Marketplace de Origem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b4332; /* Verde floresta profundo */
+            --accent: #74c365;  /* Verde broto */
+            --gold: #ffb703;
+            --bg: #fdfdfb;
+            --text: #2d3436;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
+
+        /* --- Navegação Premium --- */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            margin-left: 30px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- Hero Section com Overlay Orgânico --- */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(27, 67, 50, 0.7), rgba(27, 67, 50, 0.4)), 
+                        url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            color: white;
+            clip-path: ellipse(150% 100% at 50% 0%); /* Curva orgânica no fundo */
+        }
+
+        .hero-content { max-width: 650px; }
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.25rem; margin-bottom: 2.5rem; opacity: 0.9; }
+
+        /* --- Botões --- */
+        .cta-container { display: flex; gap: 15px; }
+        .btn-main {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 183, 3, 0.3); }
+
+        /* --- Grid de Produtos (Efeito Card Elevado) --- */
+        .container { padding: 80px 8%; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 15px;
+            border: 1px solid #eee;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover { transform: scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+
+        .card-img {
+            height: 240px;
+            border-radius: 18px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .badge-sazonal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .card-body h3 { font-size: 1.4rem; margin-bottom: 8px; color: var(--primary); }
+        .producer-info { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; color: #666; font-size: 0.85rem; }
+        .producer-info img { width: 24px; height: 24px; border-radius: 50%; }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+        }
+        .price { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .price span { font-size: 0.9rem; color: #999; }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+        .add-btn:hover { background: var(--accent); }
+
+        /* --- Footer --- */
+        footer { background: var(--primary); color: white; padding: 60px 8% 30px; text-align: center; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; margin-bottom: 40px; }
+        .footer-col h4 { margin-bottom: 20px; color: var(--accent); }
+        .footer-col p { opacity: 0.7; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            header { padding: 1.2rem 5%; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Agro<span>Vila</span></div>
+    <nav class="nav-links">
+        <a href="#loja">Mercado</a>
+        <a href="#produtores">Mapa de Produtores</a>
+        <a href="#assinaturas">Cestas Mensais</a>
+        <a href="#" class="btn-main" style="padding: 10px 20px;">Entrar</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>O sabor real não viaja meio mundo.</h1>
+        <p>Receba em casa produtos colhidos há menos de 24h por produtores da sua região. Sem stock em armazém, sem conservantes.</p>
+        <div class="cta-container">
+            <a href="#loja" class="btn-main">Comprar Frescos</a>
+            <a href="#" style="color: white; padding: 18px 20px; text-decoration: none; font-weight: 600;">Como funciona →</a>
+        </div>
+    </div>
+</section>
+
+<main class="container" id="loja">
+    <div class="section-header">
+        <div>
+            <h2 style="font-size: 2.5rem; color: var(--primary);">Destaques da Semana</h2>
+            <p style="color: #666;">Produtos em plena época, no pico do sabor.</p>
+        </div>
+        <div class="filters">
+            <select style="padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
+                <option>Filtrar por Distrito</option>
+                <option>Santarém</option>
+                <option>Lisboa</option>
+                <option>Setúbal</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="products-grid">
+        <article class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1590779033100-9f60705a2f3b?auto=format&fit=crop&w=500&q=80')">
+                <span class="badge-sazonal">✨ Época Alta</span>
+            </div>
+            <div class="card-body">
+                <div class="producer-info">
+                    <img src="https://i.pravatar.cc/150?u=farm1" alt="Produtor">
+                    <span>Quinta do Olival, Santarém</span>
+                </div>
+                <h3>Tomate Coração de Boi</h3>
+                <p style="font-size: 0.9rem; color: #777; margin-bottom: 15px;">Colhidos manualmente em maturação perfeita.</p>
+                <div class="card-footer">
+                    <div class="price">3,80€ <span>/ kg</span></div>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=500&q=80')">
+                <span class="badge-sazonal">🌿 100% Bio</span>
+            </div>
+            <div class="card-body">
+                <div class="producer-info">
+                    <img src="https://i.pravatar.cc/150?u=farm2" alt="Produtor">
+                    <span>Horta do Zé, Palmela</span>
+                </div>
+                <h3>Cesto Família Pequena</h3>
+                <p style="font-size: 0.9rem; color: #777; margin-bottom: 15px;">7 variedades de legumes + ervas aromáticas.</p>
+                <div class="card-footer">
+                    <div class="price">18,50€ <span>/ un</span></div>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&w=500&q=80')">
+                <span class="badge-sazonal">🍯 Artesanal</span>
+            </div>
+            <div class="card-body">
+                <div class="producer-info">
+                    <img src="https://i.pravatar.cc/150?u=farm3" alt="Produtor">
+                    <span>Apicultores do Tejo</span>
+                </div>
+                <h3>Mel de Flor de Laranjeira</h3>
+                <p style="font-size: 0.9rem; color: #777; margin-bottom: 15px;">Extracção a frio, sem açúcares adicionados.</p>
+                <div class="card-footer">
+                    <div class="price">6,20€ <span>/ 500g</span></div>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <div class="logo" style="color: white; margin-bottom: 20px;">Agro<span>Vila</span></div>
+            <p>Conectando a sabedoria da terra com a conveniência da cidade desde 2024.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Menu</h4>
+            <p>Sobre Nós</p>
+            <p>Seja um Produtor</p>
+            <p>Zonas de Entrega</p>
+            <p>Política de Qualidade</p>
+        </div>
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p>Receba o calendário de colheitas mensal.</p>
+            <input type="email" placeholder="O seu email" style="padding: 10px; margin-top: 10px; border-radius: 5px; border: none; width: 100%;">
+        </div>
+    </div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+        &copy; 2026 AgroVila Marketplace Digital.
+    </div>
+</footer>
+
+</body>
+</html>
